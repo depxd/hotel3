@@ -1,0 +1,90 @@
+--
+-- File generated with SQLiteStudio v3.4.4 on Ср окт 16 16:58:52 2024
+--
+-- Text encoding used: System
+--
+PRAGMA foreign_keys = off;
+BEGIN TRANSACTION;
+
+-- Table: Additional_Services
+CREATE TABLE IF NOT EXISTS Additional_Services (
+    Service_ID_PK INTEGER PRIMARY KEY,
+    Service VARCHAR(20),
+    Cost INTEGER(5),
+    Availability VARCHAR(20)
+);
+INSERT INTO Additional_Services (Service_ID_PK, Service, Cost, Availability) VALUES (1, NULL, NULL, NULL);
+
+-- Table: Booking_Service
+CREATE TABLE IF NOT EXISTS Booking_Service (
+    Booking_ID_FK INTEGER,
+    Service_ID_FK INTEGER,
+    FOREIGN KEY (Booking_ID_FK) REFERENCES Room_Booking(Booking_ID_PK),
+    FOREIGN KEY (Service_ID_FK) REFERENCES Additional_Services(Service_ID_PK)
+);
+
+-- Table: Clients
+CREATE TABLE IF NOT EXISTS Clients (Client_ID_PK INTEGER PRIMARY KEY, Last_Name VARCHAR (20) NOT NULL, First_Name VARCHAR (20) NOT NULL, Patronymic VARCHAR (20) NOT NULL, Birth_Date DATE NOT NULL, Passport_Series INTEGER (4) NOT NULL, Passport_Number INTEGER (6) NOT NULL, Address VARCHAR (150) NOT NULL, Citizenship VARCHAR (20) NOT NULL, Email VARCHAR (50) NOT NULL, UNIQUE (Passport_Series, Passport_Number));
+INSERT INTO Clients (Client_ID_PK, Last_Name, First_Name, Patronymic, Birth_Date, Passport_Series, Passport_Number, Address, Citizenship, Email) VALUES (1, 'Гусев', 'Максим', 'Андреевич', '12.09.2001', 1234, 123456, 'Владимирская область, город Муром, улица Октябрьская 54.', 'РФ', 'g@mail.ru');
+INSERT INTO Clients (Client_ID_PK, Last_Name, First_Name, Patronymic, Birth_Date, Passport_Series, Passport_Number, Address, Citizenship, Email) VALUES (2, 'Иванов', 'Иван', 'Иванович', '13.08.2002', 1235, 321456, 'Краснадарский край, город Краснодар, ул 3-мая - 65', 'РФ', 'g1@mai.ru');
+INSERT INTO Clients (Client_ID_PK, Last_Name, First_Name, Patronymic, Birth_Date, Passport_Series, Passport_Number, Address, Citizenship, Email) VALUES (3, 'Машинистов', 'Андрей', 'Викторович', '01.01.1999', 3321, 322121, 'Нижегородская область, город Дзержинск, ул Московская 65', 'РФ', 'g2@mail.ru');
+
+-- Table: Room_Booking
+CREATE TABLE IF NOT EXISTS Room_Booking (Booking_ID_PK INTEGER PRIMARY KEY, Client_ID_FK INTEGER, Room_ID_FK INTEGER, Check_In_Date DATE, Check_Out_Date DATE, FOREIGN KEY (Client_ID_FK) REFERENCES Clients (Client_ID_PK), FOREIGN KEY (Room_ID_FK) REFERENCES Rooms (Room_ID_PK));
+INSERT INTO Room_Booking (Booking_ID_PK, Client_ID_FK, Room_ID_FK, Check_In_Date, Check_Out_Date) VALUES (1, 2, 1, '16.10.2024', '17.10.2024');
+INSERT INTO Room_Booking (Booking_ID_PK, Client_ID_FK, Room_ID_FK, Check_In_Date, Check_Out_Date) VALUES (2, 1, 2, '10.10.2024', '20.10.2024');
+
+-- Table: Rooms
+CREATE TABLE IF NOT EXISTS Rooms (Room_ID_PK INTEGER PRIMARY KEY, Staff_ID_FK INTEGER, Room_Type VARCHAR (20) NOT NULL, Status VARCHAR (20), Room_Cost INTEGER (6) NOT NULL, FOREIGN KEY (Staff_ID_FK) REFERENCES Staff (Staff_ID_PK));
+INSERT INTO Rooms (Room_ID_PK, Staff_ID_FK, Room_Type, Status, Room_Cost) VALUES (1, 4, 'Одноместный', '', 7500);
+INSERT INTO Rooms (Room_ID_PK, Staff_ID_FK, Room_Type, Status, Room_Cost) VALUES (2, 5, 'Двуместный', NULL, 10000);
+
+-- Table: Staff
+CREATE TABLE IF NOT EXISTS Staff (Staff_ID_PK INTEGER PRIMARY KEY, Last_Name VARCHAR (20) NOT NULL, First_Name VARCHAR (20) NOT NULL, Patronymic VARCHAR (20) NOT NULL, Specialization VARCHAR (20) NOT NULL, Phone_Number INTEGER (11) NOT NULL, Address VARCHAR (100) NOT NULL, UNIQUE (Phone_Number));
+INSERT INTO Staff (Staff_ID_PK, Last_Name, First_Name, Patronymic, Specialization, Phone_Number, Address) VALUES (1, 'Маркова', 'Елена ', 'Вячеславовна', 'Администратор', 89307663211, 'г. Москва, пл Востания 21');
+INSERT INTO Staff (Staff_ID_PK, Last_Name, First_Name, Patronymic, Specialization, Phone_Number, Address) VALUES (2, 'Печкурова', 'Антонина', 'Игоревна', 'Администратор', 89306321133, 'Г. Москва, ул Беговая 123');
+INSERT INTO Staff (Staff_ID_PK, Last_Name, First_Name, Patronymic, Specialization, Phone_Number, Address) VALUES (3, 'Катина', 'Василиса ', 'Андреевна', 'Менеджер', 83211234566, 'Нижегородская область, г. Нижний Новогород, ул Дружбы 1');
+INSERT INTO Staff (Staff_ID_PK, Last_Name, First_Name, Patronymic, Specialization, Phone_Number, Address) VALUES (4, 'Мыслова', 'Анастасия', 'Алексеевна', 'Горничная', 89547865432, 'Владимирская область, г. Владимир, ул Куйбышева 66');
+INSERT INTO Staff (Staff_ID_PK, Last_Name, First_Name, Patronymic, Specialization, Phone_Number, Address) VALUES (5, 'Федосеева', 'Татьяна', 'Викторовна', 'Горничная', 89543218976, 'Ивановская область, г. Иваново, ул Текстильна 23');
+INSERT INTO Staff (Staff_ID_PK, Last_Name, First_Name, Patronymic, Specialization, Phone_Number, Address) VALUES (6, 'Преображенская', 'Анастасия', 'Максимовна', 'Горничная', 89321226677, 'Владимирская область, г. Владимир, ул Лакина 21');
+
+-- Trigger: UpdateRoomStatusAfterDelete
+CREATE TRIGGER IF NOT EXISTS UpdateRoomStatusAfterDelete
+AFTER DELETE ON Room_Booking
+BEGIN
+    UPDATE Rooms
+    SET Status = CASE 
+        WHEN EXISTS (
+            SELECT 1 
+            FROM Room_Booking 
+            WHERE Room_Booking.Room_ID_FK = Rooms.Room_ID_PK 
+            AND CURRENT_DATE BETWEEN Room_Booking.Check_In_Date AND Room_Booking.Check_Out_Date
+        )
+        THEN 'занят'
+        ELSE 'свободен'
+    END;
+END;
+
+-- View: Room_Status
+CREATE VIEW IF NOT EXISTS Room_Status AS
+SELECT 
+    r.Room_ID_PK,
+    CASE 
+        WHEN EXISTS (
+            SELECT 1 
+            FROM Room_Booking rb 
+            WHERE rb.Room_ID_FK = r.Room_ID_PK 
+            AND CURRENT_DATE BETWEEN rb.Check_In_Date AND rb.Check_Out_Date
+        )
+        THEN 'занят'
+        ELSE 'свободен'
+    END AS Status,
+    MIN(rb.Check_In_Date) AS Check_In_Date,
+    MAX(rb.Check_Out_Date) AS Check_Out_Date
+FROM Rooms r
+LEFT JOIN Room_Booking rb ON r.Room_ID_PK = rb.Room_ID_FK
+AND CURRENT_DATE BETWEEN rb.Check_In_Date AND rb.Check_Out_Date
+GROUP BY r.Room_ID_PK;
+
+COMMIT TRANSACTION;
+PRAGMA foreign_keys = on;
