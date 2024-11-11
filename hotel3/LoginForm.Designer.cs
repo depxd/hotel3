@@ -37,14 +37,15 @@
             // 
             this.btnLogin_Click.Location = new System.Drawing.Point(12, 135);
             this.btnLogin_Click.Name = "btnLogin_Click";
-            this.btnLogin_Click.Size = new System.Drawing.Size(232, 46);
+            this.btnLogin_Click.Size = new System.Drawing.Size(232, 78);
             this.btnLogin_Click.TabIndex = 0;
-            this.btnLogin_Click.Text = "button1";
+            this.btnLogin_Click.Text = "Вход";
             this.btnLogin_Click.UseVisualStyleBackColor = true;
             this.btnLogin_Click.Click += new System.EventHandler(this.btnLogin_Click_Click);
             // 
             // textBoxUsername
             // 
+            this.textBoxUsername.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxUsername.Location = new System.Drawing.Point(12, 24);
             this.textBoxUsername.Multiline = true;
             this.textBoxUsername.Name = "textBoxUsername";
@@ -53,9 +54,11 @@
             // 
             // textBoxPassword
             // 
+            this.textBoxPassword.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxPassword.Location = new System.Drawing.Point(12, 81);
             this.textBoxPassword.Multiline = true;
             this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(232, 38);
             this.textBoxPassword.TabIndex = 2;
             // 
