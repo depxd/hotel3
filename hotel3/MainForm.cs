@@ -75,7 +75,7 @@ namespace hotel3
                 LoadClientDetails(clientId);
                 LoadRoomDetails(roomId);
 
-                // Очистка checkedListBox1 перед установкой новых значений
+                // Очистка checkedListBox1 перед установкой новых значени
                 foreach (int i in checkedListBox1.CheckedIndices)
                 {
                     checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
