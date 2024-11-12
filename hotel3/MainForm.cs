@@ -10,7 +10,6 @@ namespace hotel3
     {
         private SQLiteConnection conn;
         private SQLiteDataAdapter adapter;
-        private DataTable dt;
         private DataTable bookingDt;
         private DataTable clientsDt;
         private DataTable roomsDt;
@@ -24,7 +23,6 @@ namespace hotel3
             LoadBookings();
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
         }
-
         private void LoadServices()
         {
             string serviceQuery = "SELECT Service_ID_PK, Service FROM Additional_Services";
@@ -36,7 +34,6 @@ namespace hotel3
             checkedListBox1.DisplayMember = "Service";
             checkedListBox1.ValueMember = "Service_ID_PK";
         }
-
         private void LoadClientDetails(int clientId)
         {
             string query = "SELECT Last_Name, First_Name, Patronymic, Passport_Series, Passport_Number FROM Clients WHERE Client_ID_PK = @ClientID";
@@ -49,7 +46,6 @@ namespace hotel3
 
             dataGridView2.DataSource = clientDt;
         }
-
         private void LoadRoomDetails(int roomId)
         {
             string query = "SELECT Room_Type, Room_Cost FROM Rooms WHERE Room_ID_PK = @RoomID";
@@ -71,16 +67,20 @@ namespace hotel3
                 int clientId = Convert.ToInt32(selectedRow.Cells["Client_ID_FK"].Value);
                 int roomId = Convert.ToInt32(selectedRow.Cells["Room_ID_FK"].Value);
 
-                LoadSelectedServices(bookingId);
-                LoadClientDetails(clientId);
-                LoadRoomDetails(roomId);
+                // Очищаем предыдущие данные
+               listBox1.Items.Clear();
+
+                LoadSelectedServices(bookingId);  // Загружаем услуги
+                LoadClientDetails(clientId);        // Загружаем данные клиента
+                LoadRoomDetails(roomId);            // Загружаем детали номера
 
                 // Очистка checkedListBox1 перед установкой новых значений
+                // Очистка состояния выбранных элементов в checkedListBox1
                 foreach (int i in checkedListBox1.CheckedIndices)
                 {
                     checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
                 }
-
+                // Здесь также нужно обновить checkedListBox1
                 string query = "SELECT Service_ID_FK FROM Booking_Service WHERE Booking_ID_FK=@BookingID";
                 SQLiteCommand cmd = new SQLiteCommand(query, conn);
                 cmd.Parameters.AddWithValue("@BookingID", bookingId);
@@ -103,12 +103,11 @@ namespace hotel3
             }
             else
             {
-                checkedListBox2.Items.Clear();
+                listBox1.Items.Clear();
                 dataGridView2.DataSource = null;
                 dataGridView3.DataSource = null;
             }
         }
-
         private void LoadClients()
         {
             string clientQuery = "SELECT Client_ID_PK, Last_Name || ' ' || First_Name AS FullName FROM Clients";
@@ -133,6 +132,11 @@ namespace hotel3
         }
         private void LoadBookings()
         {
+            if (bookingDt != null)
+            {
+                bookingDt.Clear();
+            }
+
             conn.Open();
             string query = "SELECT * FROM Room_Booking";
             adapter = new SQLiteDataAdapter(query, conn);
@@ -143,25 +147,24 @@ namespace hotel3
         }
         private void LoadSelectedServices(int bookingId)
         {
-            string query = "SELECT Additional_Services.Service FROM Booking_Service " +
+            string query = "SELECT Additional_Services.Service " +
+                           "FROM Booking_Service " +
                            "JOIN Additional_Services ON Booking_Service.Service_ID_FK = Additional_Services.Service_ID_PK " +
                            "WHERE Booking_Service.Booking_ID_FK = @BookingID";
             SQLiteCommand cmd = new SQLiteCommand(query, conn);
             cmd.Parameters.AddWithValue("@BookingID", bookingId);
-
             SQLiteDataAdapter servicesAdapter = new SQLiteDataAdapter(cmd);
             DataTable servicesDt = new DataTable();
             servicesAdapter.Fill(servicesDt);
 
             // Очистка checkedListBox2 перед добавлением новых значений
-            checkedListBox2.Items.Clear();
+            listBox1.Items.Clear();
 
             foreach (DataRow row in servicesDt.Rows)
             {
-                checkedListBox2.Items.Add(row["Service"].ToString());
+                listBox1.Items.Add(row["Service"].ToString());
             }
         }
-
         private void buttonClient_Click(object sender, EventArgs e)
         {
             ClientForm clientsForm = new ClientForm();
@@ -183,7 +186,6 @@ namespace hotel3
             ServiceForm servicesForm = new ServiceForm();
             servicesForm.Show();
         }
-
         private void button5_Click(object sender, EventArgs e)
         {
             string query = "INSERT INTO Room_Booking (Client_ID_FK, Room_ID_FK, Check_In_Date, Check_Out_Date) VALUES (@ClientID, @RoomID, @CheckInDate, @CheckOutDate)";
@@ -212,8 +214,8 @@ namespace hotel3
 
             conn.Close();
             LoadBookings();
+            listBox1.Items.Clear();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -250,7 +252,6 @@ namespace hotel3
                     serviceCmd.Parameters.AddWithValue("@ServiceID", serviceId);
                     serviceCmd.ExecuteNonQuery();
                 }
-
                 conn.Close();
                 LoadBookings();
             }
@@ -281,14 +282,18 @@ namespace hotel3
 
                     LoadBookings();
 
-                    // Очистка checkedListBox2 после удаления бронирования
-                    checkedListBox2.Items.Clear();
+                    // Очистка listBox1 после удаления бронирования
+                    listBox1.Items.Clear();
                 }
             }
             else
             {
                 MessageBox.Show("Пожалуйста, выберите бронь для удаления.");
             }
+
+        }
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
         }
     }
 }
