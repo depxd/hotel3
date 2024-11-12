@@ -17,7 +17,7 @@ namespace hotel3
         public MainForm()
         {
             InitializeComponent();
-            conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\Hotel1.db;Version=3;");
+            conn = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\Hotel1.db;Version=3;");
             LoadClients();
             LoadRooms();
             LoadServices();
@@ -75,7 +75,7 @@ namespace hotel3
                 LoadClientDetails(clientId);
                 LoadRoomDetails(roomId);
 
-                // Очистка checkedListBox1 перед установкой новых значени
+                // Очистка checkedListBox1 перед установкой новых значений
                 foreach (int i in checkedListBox1.CheckedIndices)
                 {
                     checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);

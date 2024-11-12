@@ -20,7 +20,7 @@ namespace hotel3
         public ServiceForm()
         {
             InitializeComponent();
-            conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\Hotel1.db;Version=3;");
+            conn = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\Hotel1.db;Version=3;");
             LoadData();
         }
         private void LoadData()
