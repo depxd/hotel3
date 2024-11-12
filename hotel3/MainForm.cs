@@ -162,8 +162,6 @@ namespace hotel3
             }
         }
 
-
-
         private void buttonClient_Click(object sender, EventArgs e)
         {
             ClientForm clientsForm = new ClientForm();
