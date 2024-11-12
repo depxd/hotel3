@@ -16,7 +16,6 @@ namespace hotel3
         private SQLiteConnection conn;
         private SQLiteDataAdapter adapter;
         private DataTable dt;
-
         public StuffForm()
         {
             InitializeComponent();
@@ -33,7 +32,6 @@ namespace hotel3
             dataGridView1.DataSource = dt;
             conn.Close();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             string query = "INSERT INTO Staff (Last_Name, First_Name, Patronymic, Specialization, Phone_Number, Address) VALUES (@LastName, @FirstName, @Patronymic, @Specialization, @PhoneNumber, @Address)";
@@ -74,7 +72,6 @@ namespace hotel3
                 MessageBox.Show("Пожалуйста, выберите сотрудника для редактирования.");
             }
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)

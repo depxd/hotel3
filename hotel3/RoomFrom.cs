@@ -32,13 +32,17 @@ namespace hotel3
         private void LoadData()
         {
             conn.Open();
-            string query = "SELECT * FROM Rooms";
+            string query = @"
+                SELECT Rooms.Room_ID_PK, Rooms.Room_Type, Rooms.Status, Rooms.Room_Cost, Staff.Staff_ID_PK || ' ' || Staff.Last_Name || ' ' || Staff.First_Name AS StaffID
+                FROM Rooms
+                JOIN Staff ON Rooms.Staff_ID_FK = Staff.Staff_ID_PK";
             adapter = new SQLiteDataAdapter(query, conn);
             dt = new DataTable();
             adapter.Fill(dt);
             dataGridView1.DataSource = dt;
             conn.Close();
         }
+
         private void LoadStaffData()
         {
             string staffQuery = "SELECT Staff_ID_PK, Last_Name || ' ' || First_Name AS FullName FROM Staff";
@@ -55,7 +59,6 @@ namespace hotel3
             string query = "INSERT INTO Rooms (Room_Type, Status, Room_Cost, Staff_ID_FK) VALUES (@RoomType, @Status, @RoomCost, @StaffID)";
             SQLiteCommand cmd = new SQLiteCommand(query, conn);
             cmd.Parameters.AddWithValue("@RoomType", textBox1.Text);
-            
             cmd.Parameters.AddWithValue("@Status", textBox2.Text);
             cmd.Parameters.AddWithValue("@RoomCost", textBox3.Text);
             cmd.Parameters.AddWithValue("@StaffID", comboBox1.SelectedValue);
@@ -88,7 +91,6 @@ namespace hotel3
                 MessageBox.Show("Пожалуйста, выберите номер для редактирования.");
             }
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)

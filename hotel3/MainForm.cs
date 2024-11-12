@@ -121,7 +121,7 @@ namespace hotel3
         }
         private void LoadRooms()
         {
-            string roomQuery = "SELECT Room_ID_PK, Room_Type || ' ' || Room_Cost AS RoomType FROM Rooms";
+            string roomQuery = "SELECT Room_ID_PK, Room_Type || ' ' || Room_Cost AS RoomType FROM Rooms WHERE Status = 'Доступен для бронирования'";
             SQLiteDataAdapter roomsAdapter = new SQLiteDataAdapter(roomQuery, conn);
             roomsDt = new DataTable();
             roomsAdapter.Fill(roomsDt);
@@ -130,6 +130,7 @@ namespace hotel3
             comboBox1.DisplayMember = "RoomType";
             comboBox1.ValueMember = "Room_ID_PK";
         }
+
         private void LoadBookings()
         {
             if (bookingDt != null)
@@ -188,14 +189,32 @@ namespace hotel3
         }
         private void button5_Click(object sender, EventArgs e)
         {
+            conn.Open();
+
+            // Проверка на пересечение с уже существующими бронированиями
+            string checkQuery = "SELECT COUNT(*) FROM Room_Booking WHERE Room_ID_FK = @RoomID AND (" +
+                                "(@CheckInDate BETWEEN Check_In_Date AND Check_Out_Date) OR " +
+                                "(@CheckOutDate BETWEEN Check_In_Date AND Check_Out_Date) OR " +
+                                "(@CheckInDate <= Check_In_Date AND @CheckOutDate >= Check_Out_Date))";
+            SQLiteCommand checkCmd = new SQLiteCommand(checkQuery, conn);
+            checkCmd.Parameters.AddWithValue("@RoomID", comboBox1.SelectedValue);
+            checkCmd.Parameters.AddWithValue("@CheckInDate", dateTimePicker1.Value);
+            checkCmd.Parameters.AddWithValue("@CheckOutDate", dateTimePicker2.Value);
+
+            int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+            if (count > 0)
+            {
+                MessageBox.Show("Комната занята в выбранный период. Пожалуйста, выберите другую комнату или измените даты бронирования.");
+                conn.Close();
+                return;
+            }
             string query = "INSERT INTO Room_Booking (Client_ID_FK, Room_ID_FK, Check_In_Date, Check_Out_Date) VALUES (@ClientID, @RoomID, @CheckInDate, @CheckOutDate)";
             SQLiteCommand cmd = new SQLiteCommand(query, conn);
             cmd.Parameters.AddWithValue("@ClientID", comboBox2.SelectedValue);
             cmd.Parameters.AddWithValue("@RoomID", comboBox1.SelectedValue);
             cmd.Parameters.AddWithValue("@CheckInDate", dateTimePicker1.Value);
             cmd.Parameters.AddWithValue("@CheckOutDate", dateTimePicker2.Value);
-
-            conn.Open();
             cmd.ExecuteNonQuery();
 
             long bookingId = conn.LastInsertRowId;

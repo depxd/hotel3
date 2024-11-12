@@ -44,7 +44,6 @@
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.buttonRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -100,7 +99,7 @@
             this.button5.Location = new System.Drawing.Point(763, 10);
             this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(150, 28);
+            this.button5.Size = new System.Drawing.Size(170, 28);
             this.button5.TabIndex = 4;
             this.button5.Text = "Добавление";
             this.button5.UseVisualStyleBackColor = true;
@@ -124,7 +123,7 @@
             this.comboBox1.Location = new System.Drawing.Point(763, 154);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(151, 21);
+            this.comboBox1.Size = new System.Drawing.Size(170, 21);
             this.comboBox1.TabIndex = 6;
             // 
             // comboBox2
@@ -133,7 +132,7 @@
             this.comboBox2.Location = new System.Drawing.Point(763, 179);
             this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(151, 21);
+            this.comboBox2.Size = new System.Drawing.Size(170, 21);
             this.comboBox2.TabIndex = 7;
             // 
             // button1
@@ -141,7 +140,7 @@
             this.button1.Location = new System.Drawing.Point(763, 42);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 28);
+            this.button1.Size = new System.Drawing.Size(170, 28);
             this.button1.TabIndex = 8;
             this.button1.Text = "Редактирование";
             this.button1.UseVisualStyleBackColor = true;
@@ -152,7 +151,7 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(763, 130);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(170, 20);
             this.dateTimePicker1.TabIndex = 9;
             // 
             // dateTimePicker2
@@ -160,7 +159,7 @@
             this.dateTimePicker2.Location = new System.Drawing.Point(763, 107);
             this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(151, 20);
+            this.dateTimePicker2.Size = new System.Drawing.Size(170, 20);
             this.dateTimePicker2.TabIndex = 10;
             // 
             // button2
@@ -168,7 +167,7 @@
             this.button2.Location = new System.Drawing.Point(763, 75);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 28);
+            this.button2.Size = new System.Drawing.Size(170, 28);
             this.button2.TabIndex = 11;
             this.button2.Text = "Удаление";
             this.button2.UseVisualStyleBackColor = true;
@@ -215,22 +214,11 @@
             this.listBox1.Size = new System.Drawing.Size(120, 69);
             this.listBox1.TabIndex = 16;
             // 
-            // buttonRefresh
-            // 
-            this.buttonRefresh.Location = new System.Drawing.Point(9, 200);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(132, 40);
-            this.buttonRefresh.TabIndex = 17;
-            this.buttonRefresh.Text = "Обновить приложение";
-            this.buttonRefresh.UseVisualStyleBackColor = true;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1025, 366);
-            this.Controls.Add(this.buttonRefresh);
+            this.ClientSize = new System.Drawing.Size(941, 366);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.dataGridView3);
             this.Controls.Add(this.dataGridView2);
@@ -275,6 +263,5 @@
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button buttonRefresh;
     }
 }
