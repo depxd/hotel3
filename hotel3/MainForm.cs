@@ -16,7 +16,7 @@ namespace hotel3
         public MainForm()
         {
             InitializeComponent();
-            conn = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\Hotel1.db;Version=3;");
+            conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadClients();
             LoadRooms();
             LoadServices();
