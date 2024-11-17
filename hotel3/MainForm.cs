@@ -309,7 +309,6 @@ namespace hotel3
             {
                 MessageBox.Show("Пожалуйста, выберите бронь для удаления.");
             }
-
         }
         private void buttonRefresh_Click(object sender, EventArgs e)
         {

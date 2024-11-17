@@ -32,8 +32,25 @@ namespace hotel3
             adapter.Fill(dt);
             dataGridView1.DataSource = dt;
             conn.Close();
-        }
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
 
+        }
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                textBox1.Text = selectedRow.Cells["Last_Name"].Value.ToString();
+                textBox2.Text = selectedRow.Cells["First_Name"].Value.ToString();
+                textBox3.Text = selectedRow.Cells["Patronymic"].Value.ToString();
+                dateTimePicker1.Value = Convert.ToDateTime(selectedRow.Cells["Birth_Date"].Value);
+                textBox4.Text = selectedRow.Cells["Passport_Series"].Value.ToString();
+                textBox5.Text = selectedRow.Cells["Passport_Number"].Value.ToString();
+                textBox6.Text = selectedRow.Cells["Address"].Value.ToString();
+                textBox7.Text = selectedRow.Cells["Citizenship"].Value.ToString();
+                textBox8.Text = selectedRow.Cells["Email"].Value.ToString();
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             string query = "INSERT INTO Clients (Last_Name, First_Name, Patronymic, Birth_Date, Passport_Series, Passport_Number, Address, Citizenship, Email) VALUES (@LastName, @FirstName, @Patronymic, @BirthDate, @PassportSeries, @PassportNumber, @Address, @Citizenship, @Email)"; 

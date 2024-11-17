@@ -26,22 +26,35 @@ namespace hotel3
             conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadData();
             LoadStaffData();
-           
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
 
         }
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                textBox1.Text = selectedRow.Cells["Room_Type"].Value.ToString();
+                textBox2.Text = selectedRow.Cells["Status"].Value.ToString();
+                textBox3.Text = selectedRow.Cells["Room_Cost"].Value.ToString();
+                comboBox1.SelectedValue = Convert.ToInt32(selectedRow.Cells["Staff_ID_PK"].Value);
+            }
+        }
+
         private void LoadData()
         {
             conn.Open();
             string query = @"
-                SELECT Rooms.Room_ID_PK, Rooms.Room_Type, Rooms.Status, Rooms.Room_Cost, Staff.Staff_ID_PK || ' ' || Staff.Last_Name || ' ' || Staff.First_Name AS StaffID
-                FROM Rooms
-                JOIN Staff ON Rooms.Staff_ID_FK = Staff.Staff_ID_PK";
+                    SELECT Rooms.Room_ID_PK, Rooms.Room_Type, Rooms.Status, Rooms.Room_Cost, Staff.Staff_ID_PK, Staff.Last_Name || ' ' || Staff.First_Name AS StaffID
+                    FROM Rooms
+                    JOIN Staff ON Rooms.Staff_ID_FK = Staff.Staff_ID_PK";
             adapter = new SQLiteDataAdapter(query, conn);
             dt = new DataTable();
             adapter.Fill(dt);
             dataGridView1.DataSource = dt;
             conn.Close();
         }
+
 
         private void LoadStaffData()
         {

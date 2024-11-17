@@ -21,6 +21,7 @@ namespace hotel3
             InitializeComponent();
             conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadData();
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
         }
         private void LoadData()
         {
@@ -31,6 +32,20 @@ namespace hotel3
             adapter.Fill(dt);
             dataGridView1.DataSource = dt;
             conn.Close();
+            
+        }
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                textBox1.Text = selectedRow.Cells["Last_Name"].Value.ToString();
+                textBox2.Text = selectedRow.Cells["First_Name"].Value.ToString();
+                textBox3.Text = selectedRow.Cells["Patronymic"].Value.ToString();
+                textBox4.Text = selectedRow.Cells["Specialization"].Value.ToString();
+                textBox5.Text = selectedRow.Cells["Phone_Number"].Value.ToString();
+                textBox6.Text = selectedRow.Cells["Address"].Value.ToString();
+            }
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -89,6 +104,11 @@ namespace hotel3
             {
                 MessageBox.Show("Пожалуйста, выберите сотрудника для удаления.");
             }
+        }
+
+        private void StuffForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

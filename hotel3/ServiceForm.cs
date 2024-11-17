@@ -22,6 +22,8 @@ namespace hotel3
             InitializeComponent();
             conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadData();
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+
         }
         private void LoadData()
         {
@@ -33,6 +35,17 @@ namespace hotel3
             dataGridView1.DataSource = dt;
             conn.Close();
         }
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                textBox1.Text = selectedRow.Cells["Service"].Value.ToString();
+                textBox2.Text = selectedRow.Cells["Cost"].Value.ToString();
+                textBox3.Text = selectedRow.Cells["Availability"].Value.ToString();
+            }
+        }
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
