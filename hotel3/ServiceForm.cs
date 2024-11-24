@@ -34,6 +34,11 @@ namespace hotel3
             adapter.Fill(dt);
             dataGridView1.DataSource = dt;
             conn.Close();
+            // Устанавливаем заголовки столбцов на русском языке
+            dataGridView1.Columns["Service_ID_PK"].HeaderText = "ID услуги";
+            dataGridView1.Columns["Service"].HeaderText = "Услуга";
+            dataGridView1.Columns["Cost"].HeaderText = "Стоимость";
+            dataGridView1.Columns["Availability"].HeaderText = "Доступность";
         }
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {

@@ -53,6 +53,13 @@ namespace hotel3
             adapter.Fill(dt);
             dataGridView1.DataSource = dt;
             conn.Close();
+            // Устанавливаем заголовки столбцов на русском языке
+            dataGridView1.Columns["Room_ID_PK"].HeaderText = "ID комнаты";
+            dataGridView1.Columns["Room_Type"].HeaderText = "Тип комнаты";
+            dataGridView1.Columns["Status"].HeaderText = "Статус";
+            dataGridView1.Columns["Room_Cost"].HeaderText = "Стоимость";
+            dataGridView1.Columns["Staff_ID_PK"].HeaderText = "ID сотрудника";
+            dataGridView1.Columns["StaffID"].HeaderText = "Сотрудник";
         }
 
 

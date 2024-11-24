@@ -33,7 +33,17 @@ namespace hotel3
             dataGridView1.DataSource = dt;
             conn.Close();
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
-
+            // Настройка столбцов dataGridView1
+            dataGridView1.Columns["Client_ID_PK"].HeaderText = "ID Клиента";
+            dataGridView1.Columns["Last_Name"].HeaderText = "Фамилия";
+            dataGridView1.Columns["First_Name"].HeaderText = "Имя";
+            dataGridView1.Columns["Patronymic"].HeaderText = "Отчество";
+            dataGridView1.Columns["Birth_Date"].HeaderText = "Дата Рождения";
+            dataGridView1.Columns["Passport_Series"].HeaderText = "Серия Паспорта";
+            dataGridView1.Columns["Passport_Number"].HeaderText = "Номер Паспорта";
+            dataGridView1.Columns["Address"].HeaderText = "Адрес";
+            dataGridView1.Columns["Citizenship"].HeaderText = "Гражданство";
+            dataGridView1.Columns["Email"].HeaderText = "Email";
         }
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {

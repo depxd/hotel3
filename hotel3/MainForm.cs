@@ -147,7 +147,11 @@ namespace hotel3
             adapter.Fill(bookingDt);
             dataGridView1.DataSource = bookingDt;
             conn.Close();
-
+            dataGridView1.Columns["Booking_ID_PK"].HeaderText = "ID Бронирования";
+            dataGridView1.Columns["Client_ID_FK"].HeaderText = "ID Клиента";
+            dataGridView1.Columns["Room_ID_FK"].HeaderText = "ID Комнаты";
+            dataGridView1.Columns["Check_In_Date"].HeaderText = "Дата Заезда";
+            dataGridView1.Columns["Check_Out_Date"].HeaderText = "Дата Выезда";
         }
         private void LoadSelectedServices(int bookingId)
         {

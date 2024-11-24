@@ -32,6 +32,12 @@ namespace hotel3
             adapter.Fill(dt);
             dataGridViewHistory.DataSource = dt;
             conn.Close();
+            // Настройка столбцов dataGridView1
+            dataGridViewHistory.Columns["Booking_ID_PK"].HeaderText = "ID Бронирования";
+            dataGridViewHistory.Columns["Client_ID_FK"].HeaderText = "ID Клиента";
+            dataGridViewHistory.Columns["Room_ID_FK"].HeaderText = "ID Комнаты";
+            dataGridViewHistory.Columns["Check_In_Date"].HeaderText = "Дата Заезда";
+            dataGridViewHistory.Columns["Check_Out_Date"].HeaderText = "Дата Выезда";
         }
 
         private void HistoryForm_Load(object sender, EventArgs e)
@@ -67,5 +73,6 @@ namespace hotel3
                 MessageBox.Show("Пожалуйста, выберите запись для удаления.");
             }
         }
+
     }
 }
