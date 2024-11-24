@@ -22,6 +22,7 @@ namespace hotel3
             LoadRooms();
             LoadServices();
             LoadBookings();
+            LoadHistory();
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
         }
         private void LoadServices()
@@ -189,11 +190,8 @@ namespace hotel3
             ServiceForm servicesForm = new ServiceForm();
             servicesForm.Show();
         }
-        private void historyButton_Click(object sender, EventArgs e)
-        {
-            HistoryForm historyForm = new HistoryForm(historyDataTable);
-            historyForm.Show();
-        }
+
+
         private void button5_Click(object sender, EventArgs e)
         {
             conn.Open();
@@ -286,31 +284,7 @@ namespace hotel3
                 MessageBox.Show("Пожалуйста, выберите бронь для редактирования.");
             }
         }
-        private void LoadHistory()
-        {
-            string query = "SELECT * FROM Booking_History";
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(query, conn);
-            historyDataTable = new DataTable();
-            adapter.Fill(historyDataTable);
-        }
-        private void AddToBookingHistory(int bookingId, int clientId, int roomId, DateTime startDate, DateTime endDate)
-        {
-            string query = "INSERT INTO Booking_History (Booking_ID_PK, Client_ID_FK, Room_ID_FK, Check_In_Date, Check_Out_Date) " +
-                           "VALUES (@BookingID, @ClientID, @RoomID, @CheckInDate, @CheckOutDate)";
-            SQLiteCommand cmd = new SQLiteCommand(query, conn);
-            cmd.Parameters.AddWithValue("@BookingID", bookingId);
-            cmd.Parameters.AddWithValue("@ClientID", clientId);
-            cmd.Parameters.AddWithValue("@RoomID", roomId);
-            cmd.Parameters.AddWithValue("@CheckInDate", startDate);
-            cmd.Parameters.AddWithValue("@CheckOutDate", endDate);
 
-            conn.Open();
-            cmd.ExecuteNonQuery();
-            conn.Close();
-
-            // Обновляем данные в таблице истории бронирований
-            LoadHistory();
-        }
         private void button2_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -326,16 +300,19 @@ namespace hotel3
 
                 if (result == DialogResult.Yes)
                 {
-                    string query = "DELETE FROM Room_Booking WHERE Booking_ID_PK=@BookingID";
-                    SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                    string deleteQuery = "DELETE FROM Room_Booking WHERE Booking_ID_PK=@BookingID";
+                    SQLiteCommand cmd = new SQLiteCommand(deleteQuery, conn);
                     cmd.Parameters.AddWithValue("@BookingID", bookingId);
 
                     conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
 
                     // Добавляем запись в таблицу истории бронирований
                     AddToBookingHistory(bookingId, clientId, roomId, startDate, endDate);
+
+                    // Удаляем запись из основной таблицы бронирований
+                    cmd.ExecuteNonQuery();
+
+                    conn.Close();
 
                     // Обновляем список бронирований
                     LoadBookings();
@@ -351,6 +328,34 @@ namespace hotel3
         }
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
+        }
+        private void AddToBookingHistory(int bookingId, int clientId, int roomId, DateTime startDate, DateTime endDate)
+        {
+            string query = @"
+        INSERT INTO Booking_History (Booking_ID_PK, Client_ID_FK, Room_ID_FK, Check_In_Date, Check_Out_Date)
+        VALUES (@BookingID, @ClientID, @RoomID, @CheckInDate, @CheckOutDate)";
+            SQLiteCommand cmd = new SQLiteCommand(query, conn);
+            cmd.Parameters.AddWithValue("@BookingID", bookingId);
+            cmd.Parameters.AddWithValue("@ClientID", clientId);
+            cmd.Parameters.AddWithValue("@RoomID", roomId);
+            cmd.Parameters.AddWithValue("@CheckInDate", startDate);
+            cmd.Parameters.AddWithValue("@CheckOutDate", endDate);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        private void LoadHistory()
+        {
+            string query = "SELECT * FROM Booking_History";
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(query, conn);
+            historyDataTable = new DataTable();
+            adapter.Fill(historyDataTable);
+        }
+
+        private void historyButton_Click(object sender, EventArgs e)
+        {
+            HistoryForm historyForm = new HistoryForm(); 
+            historyForm.Show();
         }
     }
 }

@@ -115,5 +115,10 @@ namespace hotel3
                 MessageBox.Show("Пожалуйста, выберите клиента для редактирования.");
             }
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
