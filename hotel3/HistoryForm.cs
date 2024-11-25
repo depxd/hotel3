@@ -20,25 +20,41 @@ namespace hotel3
         public HistoryForm()
         {
             InitializeComponent();
-            conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
+            conn = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadData();
         }
         private void LoadData()
         {
             conn.Open();
-            string query = "SELECT * FROM Booking_History";
+            string query = @"
+                SELECT 
+                    Booking_History.Booking_ID_PK, 
+                    Clients.Last_Name || ' ' || SUBSTR(Clients.First_Name, 1, 1) || '.' || SUBSTR(Clients.Patronymic, 1, 1) || '.' AS Client_Name,
+                    Rooms.Room_ID_PK,
+                    Rooms.Room_Type,
+                    Booking_History.Check_In_Date,
+                    Booking_History.Check_Out_Date
+                FROM 
+                    Booking_History
+                JOIN 
+                    Clients ON Booking_History.Client_ID_FK = Clients.Client_ID_PK
+                JOIN 
+                    Rooms ON Booking_History.Room_ID_FK = Rooms.Room_ID_PK";
             adapter = new SQLiteDataAdapter(query, conn);
             dt = new DataTable();
             adapter.Fill(dt);
             dataGridViewHistory.DataSource = dt;
             conn.Close();
+
             // Настройка столбцов dataGridView1
             dataGridViewHistory.Columns["Booking_ID_PK"].HeaderText = "ID Бронирования";
-            dataGridViewHistory.Columns["Client_ID_FK"].HeaderText = "ID Клиента";
-            dataGridViewHistory.Columns["Room_ID_FK"].HeaderText = "ID Комнаты";
+            dataGridViewHistory.Columns["Client_Name"].HeaderText = "ФИО Клиента";
+            dataGridViewHistory.Columns["Room_ID_PK"].HeaderText = "Номер Комнаты";
+            dataGridViewHistory.Columns["Room_Type"].HeaderText = "Тип Комнаты";
             dataGridViewHistory.Columns["Check_In_Date"].HeaderText = "Дата Заезда";
             dataGridViewHistory.Columns["Check_Out_Date"].HeaderText = "Дата Выезда";
         }
+
 
         private void HistoryForm_Load(object sender, EventArgs e)
         {

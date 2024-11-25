@@ -17,7 +17,7 @@ namespace hotel3
         public MainForm()
         {
             InitializeComponent();
-            conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
+            conn = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadClients();
             LoadRooms();
             LoadServices();
@@ -67,22 +67,22 @@ namespace hotel3
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
                 int bookingId = Convert.ToInt32(selectedRow.Cells["Booking_ID_PK"].Value);
                 int clientId = Convert.ToInt32(selectedRow.Cells["Client_ID_FK"].Value);
+                string clientName = selectedRow.Cells["Client_Name"].Value.ToString();
                 int roomId = Convert.ToInt32(selectedRow.Cells["Room_ID_FK"].Value);
 
                 // Очищаем предыдущие данные
-               listBox1.Items.Clear();
+                listBox1.Items.Clear();
 
                 LoadSelectedServices(bookingId);  // Загружаем услуги
-                LoadClientDetails(clientId);        // Загружаем данные клиента
-                LoadRoomDetails(roomId);            // Загружаем детали номера
+                LoadClientDetails(clientId);      // Загружаем данные клиента
+                LoadRoomDetails(roomId);          // Загружаем данные о комнате
 
                 // Очистка checkedListBox1 перед установкой новых значений
-                // Очистка состояния выбранных элементов в checkedListBox1
                 foreach (int i in checkedListBox1.CheckedIndices)
                 {
                     checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
                 }
-                // Здесь также нужно обновить checkedListBox1
+
                 string query = "SELECT Service_ID_FK FROM Booking_Service WHERE Booking_ID_FK=@BookingID";
                 SQLiteCommand cmd = new SQLiteCommand(query, conn);
                 cmd.Parameters.AddWithValue("@BookingID", bookingId);
@@ -141,18 +141,37 @@ namespace hotel3
             }
 
             conn.Open();
-            string query = "SELECT * FROM Room_Booking";
+            string query = @"
+        SELECT 
+            Room_Booking.Booking_ID_PK, 
+            Room_Booking.Client_ID_FK, 
+            Clients.Last_Name || ' ' || SUBSTR(Clients.First_Name, 1, 1) || '.' || SUBSTR(Clients.Patronymic, 1, 1) || '.' AS Client_Name,
+            Room_Booking.Room_ID_FK,
+            Rooms.Room_Type,
+            Room_Booking.Check_In_Date,
+            Room_Booking.Check_Out_Date
+        FROM 
+            Room_Booking
+        JOIN 
+            Clients ON Room_Booking.Client_ID_FK = Clients.Client_ID_PK
+        JOIN 
+            Rooms ON Room_Booking.Room_ID_FK = Rooms.Room_ID_PK";
             adapter = new SQLiteDataAdapter(query, conn);
             bookingDt = new DataTable();
             adapter.Fill(bookingDt);
             dataGridView1.DataSource = bookingDt;
             conn.Close();
+
+            // Настройка столбцов dataGridView1
             dataGridView1.Columns["Booking_ID_PK"].HeaderText = "ID Бронирования";
             dataGridView1.Columns["Client_ID_FK"].HeaderText = "ID Клиента";
-            dataGridView1.Columns["Room_ID_FK"].HeaderText = "ID Комнаты";
+            dataGridView1.Columns["Client_Name"].HeaderText = "ФИО Клиента";
+            dataGridView1.Columns["Room_ID_FK"].HeaderText = "Номер Комнаты";
+            dataGridView1.Columns["Room_Type"].HeaderText = "Тип Комнаты";
             dataGridView1.Columns["Check_In_Date"].HeaderText = "Дата Заезда";
             dataGridView1.Columns["Check_Out_Date"].HeaderText = "Дата Выезда";
         }
+
         private void LoadSelectedServices(int bookingId)
         {
             string query = "SELECT Additional_Services.Service " +
@@ -347,7 +366,6 @@ namespace hotel3
 
             cmd.ExecuteNonQuery();
         }
-
         private void LoadHistory()
         {
             string query = "SELECT * FROM Booking_History";
