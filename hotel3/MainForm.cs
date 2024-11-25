@@ -76,6 +76,7 @@ namespace hotel3
                 LoadSelectedServices(bookingId);  // Загружаем услуги
                 LoadClientDetails(clientId);      // Загружаем данные клиента
                 LoadRoomDetails(roomId);          // Загружаем данные о комнате
+                LoadGuestDetails(bookingId);      // Загружаем данные о жильцах
 
                 // Очистка checkedListBox1 перед установкой новых значений
                 foreach (int i in checkedListBox1.CheckedIndices)
@@ -109,6 +110,7 @@ namespace hotel3
                 dataGridView2.DataSource = null;
                 dataGridView3.DataSource = null;
             }
+
         }
         private void LoadClients()
         {
@@ -379,5 +381,42 @@ namespace hotel3
             HistoryForm historyForm = new HistoryForm(); 
             historyForm.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                int bookingId = Convert.ToInt32(selectedRow.Cells["Booking_ID_PK"].Value);
+
+                GuestForm guestsForm = new GuestForm(conn, bookingId);
+                guestsForm.ShowDialog();
+
+                // Обновить список жильцов для выбранного бронирования
+                LoadGuestDetails(bookingId);
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите бронирование для управления жильцами.");
+            }
+
+        }
+        private void LoadGuestDetails(int bookingId)
+        {
+            string query = "SELECT Guests.Last_Name || ' ' || Guests.First_Name || ' ' || Guests.Patronymic AS FullName " +
+                           "FROM Booking_Guests " +
+                           "JOIN Guests ON Booking_Guests.Guest_ID_FK = Guests.Guest_ID_PK " +
+                           "WHERE Booking_Guests.Booking_ID_FK=@BookingID";
+            SQLiteCommand cmd = new SQLiteCommand(query, conn);
+            cmd.Parameters.AddWithValue("@BookingID", bookingId);
+
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+            DataTable guestsDt = new DataTable();
+            adapter.Fill(guestsDt);
+
+            listBox2.DataSource = guestsDt;
+            listBox2.DisplayMember = "FullName";
+        }
+
     }
 }

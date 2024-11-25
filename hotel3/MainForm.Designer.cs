@@ -45,6 +45,8 @@
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.historyButton = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -97,7 +99,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(984, 10);
+            this.button5.Location = new System.Drawing.Point(1112, 43);
             this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(170, 28);
@@ -110,18 +112,18 @@
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(156, 10);
+            this.dataGridView1.Location = new System.Drawing.Point(154, 11);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(824, 186);
+            this.dataGridView1.Size = new System.Drawing.Size(811, 186);
             this.dataGridView1.TabIndex = 5;
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(984, 154);
+            this.comboBox1.Location = new System.Drawing.Point(1113, 187);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(170, 21);
@@ -130,7 +132,7 @@
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(984, 179);
+            this.comboBox2.Location = new System.Drawing.Point(1113, 212);
             this.comboBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(170, 21);
@@ -138,7 +140,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(984, 42);
+            this.button1.Location = new System.Drawing.Point(1113, 75);
             this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(170, 28);
@@ -149,7 +151,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(984, 130);
+            this.dateTimePicker1.Location = new System.Drawing.Point(1113, 139);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(170, 20);
@@ -157,7 +159,7 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(984, 107);
+            this.dateTimePicker2.Location = new System.Drawing.Point(1113, 163);
             this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(170, 20);
@@ -165,7 +167,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(984, 75);
+            this.button2.Location = new System.Drawing.Point(1113, 107);
             this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(170, 28);
@@ -177,7 +179,7 @@
             // checkedListBox1
             // 
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(984, 203);
+            this.checkedListBox1.Location = new System.Drawing.Point(1113, 236);
             this.checkedListBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(170, 49);
@@ -192,7 +194,7 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(824, 72);
+            this.dataGridView2.Size = new System.Drawing.Size(952, 72);
             this.dataGridView2.TabIndex = 13;
             // 
             // dataGridView3
@@ -204,13 +206,13 @@
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersWidth = 51;
             this.dataGridView3.RowTemplate.Height = 24;
-            this.dataGridView3.Size = new System.Drawing.Size(701, 72);
+            this.dataGridView3.Size = new System.Drawing.Size(829, 72);
             this.dataGridView3.TabIndex = 14;
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(154, 201);
+            this.listBox1.Location = new System.Drawing.Point(154, 203);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(120, 69);
             this.listBox1.TabIndex = 16;
@@ -226,11 +228,31 @@
             this.historyButton.UseVisualStyleBackColor = true;
             this.historyButton.Click += new System.EventHandler(this.historyButton_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(1112, 10);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(170, 28);
+            this.button3.TabIndex = 18;
+            this.button3.Text = "Добавление гостя";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(970, 11);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(138, 186);
+            this.listBox2.TabIndex = 19;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1165, 366);
+            this.ClientSize = new System.Drawing.Size(1294, 366);
+            this.Controls.Add(this.listBox2);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.historyButton);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.dataGridView3);
@@ -277,5 +299,7 @@
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button historyButton;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ListBox listBox2;
     }
 }
