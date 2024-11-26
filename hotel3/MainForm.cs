@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace hotel3
@@ -47,10 +49,18 @@ namespace hotel3
             clientAdapter.Fill(clientDt);
 
             dataGridView2.DataSource = clientDt;
+
+            // Настройка заголовков столбцов dataGridView2
+            dataGridView2.Columns["Last_Name"].HeaderText = "Фамилия";
+            dataGridView2.Columns["First_Name"].HeaderText = "Имя";
+            dataGridView2.Columns["Patronymic"].HeaderText = "Отчество";
+            dataGridView2.Columns["Passport_Series"].HeaderText = "Серия паспорта";
+            dataGridView2.Columns["Passport_Number"].HeaderText = "Номер паспорта";
         }
+
         private void LoadRoomDetails(int roomId)
         {
-            string query = "SELECT Room_Type, Room_Cost FROM Rooms WHERE Room_ID_PK = @RoomID";
+            string query = "SELECT Room_ID_PK, Room_Type, Room_Cost FROM Rooms WHERE Room_ID_PK = @RoomID";
             SQLiteCommand cmd = new SQLiteCommand(query, conn);
             cmd.Parameters.AddWithValue("@RoomID", roomId);
 
@@ -59,7 +69,45 @@ namespace hotel3
             roomAdapter.Fill(roomDt);
 
             dataGridView3.DataSource = roomDt;
+
+            // Настройка столбцов dataGridView3
+            dataGridView3.Columns["Room_ID_PK"].HeaderText = "Номер комнаты";
+            dataGridView3.Columns["Room_Type"].HeaderText = "Класс номера";
+            dataGridView3.Columns["Room_Cost"].HeaderText = "Стоимость номера в сутки";
+
+            HighlightOccupiedDates(roomId);
         }
+
+
+        private void HighlightOccupiedDates(int roomId)
+        {
+            string query = "SELECT Check_In_Date, Check_Out_Date FROM Room_Booking WHERE Room_ID_FK = @RoomID";
+            SQLiteCommand cmd = new SQLiteCommand(query, conn);
+            cmd.Parameters.AddWithValue("@RoomID", roomId);
+
+            SQLiteDataAdapter bookingAdapter = new SQLiteDataAdapter(cmd);
+            DataTable bookingDates = new DataTable();
+            bookingAdapter.Fill(bookingDates);
+
+            // Очистка предыдущих выделенных дат
+            monthCalendar1.RemoveAllBoldedDates();
+
+            foreach (DataRow row in bookingDates.Rows)
+            {
+                DateTime startDate = Convert.ToDateTime(row["Check_In_Date"]);
+                DateTime endDate = Convert.ToDateTime(row["Check_Out_Date"]);
+
+                for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                {
+                    monthCalendar1.AddBoldedDate(date);
+                }
+            }
+
+            monthCalendar1.UpdateBoldedDates();
+        }
+
+
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -125,7 +173,7 @@ namespace hotel3
         }
         private void LoadRooms()
         {
-            string roomQuery = "SELECT Room_ID_PK, Room_Type || ' ' || Room_Cost AS RoomType FROM Rooms WHERE Status = 'Доступен для бронирования'";
+            string roomQuery = "SELECT Room_ID_PK, Room_ID_PK || ' ' || Room_Type || ' ' || Room_Cost AS RoomType FROM Rooms WHERE Status = 'Доступен для бронирования'";
             SQLiteDataAdapter roomsAdapter = new SQLiteDataAdapter(roomQuery, conn);
             roomsDt = new DataTable();
             roomsAdapter.Fill(roomsDt);
@@ -172,7 +220,43 @@ namespace hotel3
             dataGridView1.Columns["Room_Type"].HeaderText = "Тип Комнаты";
             dataGridView1.Columns["Check_In_Date"].HeaderText = "Дата Заезда";
             dataGridView1.Columns["Check_Out_Date"].HeaderText = "Дата Выезда";
+
+            HighlightExpiringBookings();
         }
+
+
+        private void HighlightExpiringBookings()
+        {
+            DateTime now = DateTime.Now;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells["Check_Out_Date"].Value != null)
+                {
+                    DateTime checkOutDate = Convert.ToDateTime(row.Cells["Check_Out_Date"].Value);
+                    int daysLeft = (checkOutDate - now).Days;
+
+                    if (daysLeft <= 1)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Red;
+                    }
+                    else if (daysLeft <= 3)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Yellow;
+                    }
+                    else if (daysLeft <= 5)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.White; // Возвращаем к стандартному цвету
+                    }
+                }
+            }
+        }
+
+
+
 
         private void LoadSelectedServices(int bookingId)
         {

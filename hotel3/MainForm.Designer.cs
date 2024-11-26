@@ -47,6 +47,7 @@
             this.historyButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -55,7 +56,7 @@
             // buttonClient
             // 
             this.buttonClient.Location = new System.Drawing.Point(9, 10);
-            this.buttonClient.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonClient.Margin = new System.Windows.Forms.Padding(2);
             this.buttonClient.Name = "buttonClient";
             this.buttonClient.Size = new System.Drawing.Size(135, 41);
             this.buttonClient.TabIndex = 0;
@@ -67,7 +68,7 @@
             // buttonStuff
             // 
             this.buttonStuff.Location = new System.Drawing.Point(9, 102);
-            this.buttonStuff.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonStuff.Margin = new System.Windows.Forms.Padding(2);
             this.buttonStuff.Name = "buttonStuff";
             this.buttonStuff.Size = new System.Drawing.Size(135, 46);
             this.buttonStuff.TabIndex = 1;
@@ -78,7 +79,7 @@
             // Room
             // 
             this.Room.Location = new System.Drawing.Point(9, 154);
-            this.Room.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Room.Margin = new System.Windows.Forms.Padding(2);
             this.Room.Name = "Room";
             this.Room.Size = new System.Drawing.Size(135, 41);
             this.Room.TabIndex = 2;
@@ -89,7 +90,7 @@
             // Service
             // 
             this.Service.Location = new System.Drawing.Point(9, 56);
-            this.Service.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Service.Margin = new System.Windows.Forms.Padding(2);
             this.Service.Name = "Service";
             this.Service.Size = new System.Drawing.Size(135, 41);
             this.Service.TabIndex = 3;
@@ -100,7 +101,7 @@
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(1112, 43);
-            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(170, 28);
             this.button5.TabIndex = 4;
@@ -113,7 +114,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(154, 11);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
@@ -124,7 +125,7 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(1113, 187);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(170, 21);
             this.comboBox1.TabIndex = 6;
@@ -133,7 +134,7 @@
             // 
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(1113, 212);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(170, 21);
             this.comboBox2.TabIndex = 7;
@@ -141,7 +142,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(1113, 75);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(170, 28);
             this.button1.TabIndex = 8;
@@ -152,7 +153,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(1113, 139);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(170, 20);
             this.dateTimePicker1.TabIndex = 9;
@@ -160,7 +161,7 @@
             // dateTimePicker2
             // 
             this.dateTimePicker2.Location = new System.Drawing.Point(1113, 163);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(170, 20);
             this.dateTimePicker2.TabIndex = 10;
@@ -168,7 +169,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(1113, 107);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(170, 28);
             this.button2.TabIndex = 11;
@@ -180,7 +181,7 @@
             // 
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Location = new System.Drawing.Point(1113, 236);
-            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(170, 49);
             this.checkedListBox1.TabIndex = 12;
@@ -190,7 +191,7 @@
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(156, 280);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 24;
@@ -202,7 +203,7 @@
             this.dataGridView3.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Location = new System.Drawing.Point(279, 203);
-            this.dataGridView3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView3.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersWidth = 51;
             this.dataGridView3.RowTemplate.Height = 24;
@@ -220,7 +221,7 @@
             // historyButton
             // 
             this.historyButton.Location = new System.Drawing.Point(9, 203);
-            this.historyButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.historyButton.Margin = new System.Windows.Forms.Padding(2);
             this.historyButton.Name = "historyButton";
             this.historyButton.Size = new System.Drawing.Size(135, 44);
             this.historyButton.TabIndex = 17;
@@ -246,11 +247,18 @@
             this.listBox2.Size = new System.Drawing.Size(138, 186);
             this.listBox2.TabIndex = 19;
             // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(1113, 296);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 20;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1294, 366);
+            this.ClientSize = new System.Drawing.Size(1294, 563);
+            this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.historyButton);
@@ -270,7 +278,7 @@
             this.Controls.Add(this.Room);
             this.Controls.Add(this.buttonStuff);
             this.Controls.Add(this.buttonClient);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.Text = "MainForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -301,5 +309,6 @@
         private System.Windows.Forms.Button historyButton;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
     }
 }
