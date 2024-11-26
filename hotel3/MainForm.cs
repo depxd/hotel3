@@ -508,6 +508,30 @@ namespace hotel3
             listBox2.DataSource = guestsDt;
             listBox2.DisplayMember = "FullName";
         }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.F5)
+            {
+                RefreshApplication();
+                return true; // Указываем, что обработали клавишу
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        private void RefreshApplication()
+        {
+            LoadClients();
+            LoadRooms();
+            LoadServices();
+            LoadBookings();
+            LoadHistory();
+            // Обновление выделенных дат в monthCalendar
+            if (comboBox1.SelectedValue != null)
+            {
+                int roomId = Convert.ToInt32(comboBox1.SelectedValue);
+                HighlightOccupiedDates(roomId);
+            }
+        }
+
 
     }
 }
