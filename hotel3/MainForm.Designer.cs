@@ -118,7 +118,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(811, 186);
+            this.dataGridView1.Size = new System.Drawing.Size(811, 264);
             this.dataGridView1.TabIndex = 5;
             // 
             // comboBox1
@@ -190,32 +190,32 @@
             // 
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(156, 280);
+            this.dataGridView2.Location = new System.Drawing.Point(157, 382);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(952, 72);
+            this.dataGridView2.Size = new System.Drawing.Size(952, 97);
             this.dataGridView2.TabIndex = 13;
             // 
             // dataGridView3
             // 
             this.dataGridView3.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(279, 203);
+            this.dataGridView3.Location = new System.Drawing.Point(280, 281);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersWidth = 51;
             this.dataGridView3.RowTemplate.Height = 24;
-            this.dataGridView3.Size = new System.Drawing.Size(829, 72);
+            this.dataGridView3.Size = new System.Drawing.Size(829, 97);
             this.dataGridView3.TabIndex = 14;
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(154, 203);
+            this.listBox1.Location = new System.Drawing.Point(155, 281);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 69);
+            this.listBox1.Size = new System.Drawing.Size(120, 95);
             this.listBox1.TabIndex = 16;
             // 
             // historyButton
@@ -244,7 +244,7 @@
             this.listBox2.FormattingEnabled = true;
             this.listBox2.Location = new System.Drawing.Point(970, 11);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(138, 186);
+            this.listBox2.Size = new System.Drawing.Size(138, 264);
             this.listBox2.TabIndex = 19;
             // 
             // monthCalendar1
