@@ -77,8 +77,6 @@ namespace hotel3
 
             HighlightOccupiedDates(roomId);
         }
-
-
         private void HighlightOccupiedDates(int roomId)
         {
             string query = "SELECT Check_In_Date, Check_Out_Date FROM Room_Booking WHERE Room_ID_FK = @RoomID";
@@ -91,6 +89,8 @@ namespace hotel3
 
             // Очистка предыдущих выделенных дат
             monthCalendar1.RemoveAllBoldedDates();
+            monthCalendar1.RemoveAllAnnuallyBoldedDates();
+            monthCalendar1.RemoveAllMonthlyBoldedDates();
 
             foreach (DataRow row in bookingDates.Rows)
             {
@@ -105,8 +105,6 @@ namespace hotel3
 
             monthCalendar1.UpdateBoldedDates();
         }
-
-
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
@@ -181,7 +179,20 @@ namespace hotel3
             comboBox1.DataSource = roomsDt;
             comboBox1.DisplayMember = "RoomType";
             comboBox1.ValueMember = "Room_ID_PK";
+
+            // Назначаем обработчик события SelectedIndexChanged для ComboBox
+            comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
         }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedValue != null)
+            {
+                int roomId = Convert.ToInt32(comboBox1.SelectedValue);
+                HighlightOccupiedDates(roomId);
+            }
+        }
+
 
         private void LoadBookings()
         {
@@ -254,10 +265,6 @@ namespace hotel3
                 }
             }
         }
-
-
-
-
         private void LoadSelectedServices(int bookingId)
         {
             string query = "SELECT Additional_Services.Service " +
