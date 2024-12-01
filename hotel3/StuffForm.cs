@@ -19,7 +19,7 @@ namespace hotel3
         public StuffForm()
         {
             InitializeComponent();
-            conn = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;");
+            conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadData();
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
         }
@@ -116,6 +116,35 @@ namespace hotel3
         private void StuffForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string input = textBox7.Text.Trim();
+            string[] parts = input.Split(' ');
+
+            string firstName = parts.Length > 1 ? parts[1] : "";
+            string lastName = parts.Length > 0 ? parts[0] : "";
+            string middleName = parts.Length > 2 ? parts[2] : "";
+
+            using (var connection = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;"))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Staff WHERE First_Name LIKE @firstName AND Last_Name LIKE @lastName AND Patronymic LIKE @middleName";
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@firstName", "%" + firstName + "%");
+                    command.Parameters.AddWithValue("@lastName", "%" + lastName + "%");
+                    command.Parameters.AddWithValue("@middleName", "%" + middleName + "%");
+
+                    using (var adapter = new SQLiteDataAdapter(command))
+                    {
+                        var dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        dataGridView1.DataSource = dataTable;
+                    }
+                }
+            }
         }
     }
 }
