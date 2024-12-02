@@ -19,7 +19,7 @@ namespace hotel3
         public StuffForm()
         {
             InitializeComponent();
-            conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
+            conn = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadData();
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
         }
@@ -127,7 +127,7 @@ namespace hotel3
             string lastName = parts.Length > 0 ? parts[0] : "";
             string middleName = parts.Length > 2 ? parts[2] : "";
 
-            using (var connection = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;"))
+            using (var connection = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;"))
             {
                 connection.Open();
                 string query = "SELECT * FROM Staff WHERE First_Name LIKE @firstName AND Last_Name LIKE @lastName AND Patronymic LIKE @middleName";

@@ -20,7 +20,7 @@ namespace hotel3
         public ClientForm()
         {
             InitializeComponent();
-            conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
+            conn = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadData();
         }
         private void LoadData()
@@ -44,6 +44,7 @@ namespace hotel3
             dataGridView1.Columns["Address"].HeaderText = "Адрес";
             dataGridView1.Columns["Citizenship"].HeaderText = "Гражданство";
             dataGridView1.Columns["Email"].HeaderText = "Email";
+            dataGridView1.Columns["Client_ID_PK"].Visible = false;
         }
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
@@ -145,7 +146,7 @@ namespace hotel3
             Console.WriteLine("Last Name: " + lastName);
             Console.WriteLine("Middle Name: " + middleName);
 
-            using (var connection = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;"))
+            using (var connection = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;"))
             {
                 connection.Open();
                 string query = "SELECT * FROM Clients WHERE First_Name LIKE @firstName AND Last_Name LIKE @lastName AND Patronymic LIKE @middleName";

@@ -20,7 +20,7 @@ namespace hotel3
         public MainForm()
         {
             InitializeComponent();
-            conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
+            conn = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadClients();
             LoadRooms();
             LoadServices();
@@ -234,6 +234,8 @@ namespace hotel3
             dataGridView1.Columns["Check_In_Date"].HeaderText = "Дата Заезда";
             dataGridView1.Columns["Check_Out_Date"].HeaderText = "Дата Выезда";
 
+            dataGridView1.Columns["Client_ID_FK"].Visible = false;
+            dataGridView1.Columns["Booking_ID_PK"].Visible = false;
             HighlightExpiringBookings();
         }
 
@@ -543,7 +545,7 @@ namespace hotel3
             string lastName = parts.Length > 0 ? parts[0] : "";
             string middleName = parts.Length > 2 ? parts[2] : "";
 
-            using (var connection = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;"))
+            using (var connection = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;"))
             {
                 connection.Open();
                 string query = @"

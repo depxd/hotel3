@@ -20,7 +20,7 @@ namespace hotel3
         public HistoryForm()
         {
             InitializeComponent();
-            conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
+            conn = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadData();
         }
         private void LoadData()
@@ -98,9 +98,9 @@ namespace hotel3
             string lastName = parts.Length > 0 ? parts[0] : "";
             string middleName = parts.Length > 2 ? parts[2] : "";
 
-            using (var connection = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;"))
+            using (var connection = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;"))
             {
-                connection.Open();
+                connection.Open(); 
                 string query = @"
             SELECT 
                 Booking_History.Booking_ID_PK, 

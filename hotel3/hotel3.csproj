@@ -115,6 +115,18 @@
     <Compile Include="StuffForm.Designer.cs">
       <DependentUpon>StuffForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="StuffFormWork.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StuffFormWork.Designer.cs">
+      <DependentUpon>StuffFormWork.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysAdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysAdminForm.Designer.cs">
+      <DependentUpon>SysAdminForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ClientForm.resx">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,6 +159,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StuffForm.resx">
       <DependentUpon>StuffForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StuffFormWork.resx">
+      <DependentUpon>StuffFormWork.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysAdminForm.resx">
+      <DependentUpon>SysAdminForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

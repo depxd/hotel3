@@ -9,16 +9,16 @@ namespace hotel3
     {
         private SQLiteConnection conn;
         private long bookingId;
-
+        private int selectedGuestId;
 
         public GuestForm(SQLiteConnection connection, long bookingId)
         {
-           
             InitializeComponent();
             this.conn = connection;
             this.bookingId = bookingId;
             LoadGuests();
             LoadAttachedGuests();
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
         }
         private void LoadGuests()
         {
@@ -33,7 +33,6 @@ namespace hotel3
             listBox1.DisplayMember = "FullName";
             listBox1.ValueMember = "Guest_ID_PK";
         }
-
         private void LoadAttachedGuests()
         {
             string query = "SELECT Guests.Guest_ID_PK, Guests.Last_Name || ' ' || Guests.First_Name || ' ' || Guests.Patronymic AS FullName " +
@@ -51,8 +50,6 @@ namespace hotel3
             listBox2.DisplayMember = "FullName";
             listBox2.ValueMember = "Guest_ID_PK";
         }
-
-
         private void button1_Click(object sender, EventArgs e)
         {
             string query = "INSERT INTO Guests (Last_Name, First_Name, Patronymic) VALUES (@LastName, @FirstName, @Patronymic)";
@@ -68,7 +65,6 @@ namespace hotel3
             LoadGuests();
 
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem != null)
@@ -93,7 +89,6 @@ namespace hotel3
             }
 
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem != null)
@@ -118,7 +113,6 @@ namespace hotel3
             }
 
         }
-
         private void button4_Click(object sender, EventArgs e)
         {
             if (listBox2.SelectedItem != null)
@@ -143,5 +137,16 @@ namespace hotel3
             }
 
         }
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+   
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+         
+        }
     }
+
 }
+
