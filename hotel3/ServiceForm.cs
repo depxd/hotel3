@@ -118,5 +118,10 @@ namespace hotel3
         {
 
         }
+
+        private void ServiceForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
