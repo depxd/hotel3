@@ -38,7 +38,7 @@
             // btnLogin_Click
             // 
             this.btnLogin_Click.Location = new System.Drawing.Point(32, 124);
-            this.btnLogin_Click.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLogin_Click.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogin_Click.Name = "btnLogin_Click";
             this.btnLogin_Click.Size = new System.Drawing.Size(174, 63);
             this.btnLogin_Click.TabIndex = 0;
@@ -50,7 +50,7 @@
             // 
             this.textBoxUsername.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxUsername.Location = new System.Drawing.Point(32, 30);
-            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxUsername.Multiline = true;
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(175, 32);
@@ -60,7 +60,7 @@
             // 
             this.textBoxPassword.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxPassword.Location = new System.Drawing.Point(32, 79);
-            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxPassword.Multiline = true;
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '*';
@@ -95,9 +95,9 @@
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.textBoxUsername);
             this.Controls.Add(this.btnLogin_Click);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LoginForm";
-            this.Text = "LoginForm";
+            this.Text = "Окно авторизации";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
