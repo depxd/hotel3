@@ -23,7 +23,7 @@ namespace hotel3
         public RoomFrom()
         {
             InitializeComponent();
-            conn = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;");
+            conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadData();
             LoadStaffData();
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
@@ -60,9 +60,9 @@ namespace hotel3
             dataGridView1.Columns["Room_Cost"].HeaderText = "Стоимость";
             dataGridView1.Columns["Staff_ID_PK"].HeaderText = "ID сотрудника";
             dataGridView1.Columns["StaffID"].HeaderText = "Сотрудник";
+            dataGridView1.Columns["Room_ID_PK"].Visible = false;
+            dataGridView1.Columns["Staff_ID_PK"].Visible = false;
         }
-
-
         private void LoadStaffData()
         {
             string staffQuery = "SELECT Staff_ID_PK, Last_Name || ' ' || First_Name AS FullName FROM Staff";

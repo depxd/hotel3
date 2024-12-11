@@ -20,7 +20,7 @@ namespace hotel3
         public ServiceForm()
         {
             InitializeComponent();
-            conn = new SQLiteConnection("Data Source=C:\\Users\\gmax0\\Desktop\\hotel3\\Hotel1.db;Version=3;");
+            conn = new SQLiteConnection("Data Source=C:\\Users\\79307\\Desktop\\hotel3\\Hotel1.db;Version=3;");
             LoadData();
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
 
@@ -39,6 +39,7 @@ namespace hotel3
             dataGridView1.Columns["Service"].HeaderText = "Услуга";
             dataGridView1.Columns["Cost"].HeaderText = "Стоимость";
             dataGridView1.Columns["Availability"].HeaderText = "Доступность";
+            dataGridView1.Columns["Service_ID_PK"].Visible = false;
         }
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
