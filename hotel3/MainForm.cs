@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hotel3;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -585,10 +586,20 @@ namespace hotel3
 
         private void button6_Click(object sender, EventArgs e)
         {
-            LoginForm loginForm = new LoginForm();
-            loginForm.Close();
-            loginForm.Show();
-         
+            // Показать сообщение с подтверждением
+            DialogResult result = MessageBox.Show("Вы уверены, что хотите выйти из учетной записи?", "Выход из учетной записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            // Если пользователь подтверждает выход
+            if (result == DialogResult.Yes)
+            {
+                // Создать экземпляр LoginForm
+                LoginForm loginForm = new LoginForm();
+
+                // Показать LoginForm и закрыть MainForm
+                loginForm.Show();
+                this.Close(); // Закрыть MainForm
+            }
         }
     }
 }
+

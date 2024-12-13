@@ -50,6 +50,23 @@ namespace hotel3
             dv.RowFilter = string.Format("FullName LIKE '%{0}%'", searchValue);
             dataGridView1.DataSource = dv.ToTable();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Показать сообщение с подтверждением
+            DialogResult result = MessageBox.Show("Вы уверены, что хотите выйти из учетной записи?", "Выход из учетной записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            // Если пользователь подтверждает выход
+            if (result == DialogResult.Yes)
+            {
+                // Создать экземпляр LoginForm
+                LoginForm loginForm = new LoginForm();
+
+                // Показать LoginForm и закрыть SysAdminForm
+                loginForm.Show();
+                this.Close(); // Закрыть SysAdminForm
+            }
+        }
     }
 
 }
