@@ -130,5 +130,10 @@ namespace hotel3
                 MessageBox.Show("Пожалуйста, выберите номер для удаления.");
             }
         }
+
+        private void RoomFrom_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
